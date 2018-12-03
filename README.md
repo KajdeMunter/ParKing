@@ -2,33 +2,26 @@
 ParKing: That one application that helps you find a free parking space in the big city.
 
 ## Project setup
-```
-yarn install
-```
+In order to build or develop you'll need [docker](https://docs.docker.com) and [docker compose](https://docs.docker.com/compose/install/) installed.
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+$ docker-compose -f docker-compose.dev.yml up
 ```
 
-### Compiles and minifies for production
+### Runs NGINX, Compiles and minifies for production
 ```
-yarn run build
+$ docker-compose -f docker-compose.prod.yml up
 ```
 
-### Run your tests
+### Run your (unit) tests
 ```
-yarn run test
+docker exec parking_vue-app_1 /bin/sh -c yarn run test:unit
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
+docker exec parking_vue-app_1 /bin/sh -c yarn run lint
 ```
 
 ### Customize configuration

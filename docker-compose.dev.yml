@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  vue-app:
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 8080:8080
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
