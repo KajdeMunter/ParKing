@@ -2,15 +2,21 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import notFoundPage from './views/errors/notFound.vue'
+import Login from './views/Login.vue';
 
 Vue.use(Router);
 
-export default new Router({
+export const router = new Router({
   routes: [
     {
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/about',
@@ -26,4 +32,19 @@ export default new Router({
         component: notFoundPage,
     }
   ],
+});
+
+router.beforeEach((to, from, next) => {
+    // redirect to login page if not logged in and trying to access a restricted page
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+
+    if (authRequired && !loggedIn) {
+        return next({
+            path: '/login',
+            query: { returnUrl: to.path }
+        });
+    }
+    next();
 });

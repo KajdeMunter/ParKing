@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <h1>Hi {{user.firstName}}!</h1>
+    <p>You're logged in with Vue.js & Basic HTTP Authentication!!</p>
+    <h3>Users from secure api end point:</h3>
+    <em v-if="users.loading">Loading users...</em>
+    <ul v-if="users.length">
+      <li v-for="user in users" :key="user.id">
+        {{user.firstName + ' ' + user.lastName}}
+      </li>
+    </ul>
+    <p>
+      <router-link to="/login">Logout</router-link>
+    </p>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+    import { userService } from '../_services/user.service';
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+    export default {
+        data () {
+            return {
+                user: {},
+                users: []
+            }
+        },
+        created () {
+            this.user = JSON.parse(localStorage.getItem('user'));
+            this.users.loading = true;
+            userService.getAll().then(users => this.users = users);
+        }
+    };
 </script>

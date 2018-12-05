@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
+import { router } from './router';
 import store from './store';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;
+
+// setup fake backend
+import { configureFakeBackend } from '@/_helpers/fake-backend';
+configureFakeBackend();
 
 new Vue({
   router,
