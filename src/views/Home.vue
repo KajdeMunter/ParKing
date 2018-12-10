@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h1>Hi {{user.firstName}}!</h1>
-    <p>You're logged in with Vue.js & Basic HTTP Authentication!!</p>
+    <h1>Hi {{account.user.firstName}}!</h1>
+    <p>You're logged in with Vue + Vuex & JWT!!</p>
     <h3>Users from secure api end point:</h3>
     <em v-if="users.loading">Loading users...</em>
-    <ul v-if="users.length">
-      <li v-for="user in users" :key="user.id">
+    <span v-if="users.error" class="text-danger">ERROR: {{users.error}}</span>
+    <ul v-if="users.items">
+      <li v-for="user in users.items" :key="user.id">
         {{user.firstName + ' ' + user.lastName}}
+        <span v-if="user.deleting"><em> - Deleting...</em></span>
+        <span v-else-if="user.deleteError" class="text-danger"> - ERROR: {{user.deleteError}}</span>
+        <span v-else> - <a @click="deleteUser(user.id)" class="text-danger">Delete</a></span>
       </li>
     </ul>
     <p>
@@ -16,19 +20,23 @@
 </template>
 
 <script lang="ts">
-    import { userService } from '../_services/user.service';
+    import { mapState, mapActions } from 'vuex'
 
     export default {
-        data () {
-            return {
-                user: {},
-                users: []
-            }
+        computed: {
+            ...mapState({
+                account: state => state.account,
+                users: state => state.users.all
+            })
         },
         created () {
-            this.user = JSON.parse(localStorage.getItem('user'));
-            this.users.loading = true;
-            userService.getAll().then(users => this.users = users);
+            this.getAllUsers();
+        },
+        methods: {
+            ...mapActions('users', {
+                getAllUsers: 'getAll',
+                deleteUser: 'delete'
+            })
         }
     };
 </script>
