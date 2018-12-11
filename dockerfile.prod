@@ -2,7 +2,7 @@
 FROM node:9.11.1-alpine as build-stage
 WORKDIR /app
 COPY package*.json yarn.lock ./
-RUN yarn install
+RUN yarn install --frozen-lockfile --no-cache
 COPY . .
 RUN yarn run test:unit
 RUN yarn run build
