@@ -1,17 +1,17 @@
 <template>
     <div class="nav-bar">
-        <a class="nav-bar__btn" href="#">
+        <router-link to="/" class="nav-bar__btn">
             <font-awesome-icon icon="bars"></font-awesome-icon>
             <br>list
-        </a>
-        <a class="nav-bar__btn" href="#">
+        </router-link>
+        <router-link to="/map" class="nav-bar__btn">
             <font-awesome-icon icon="map-marker-alt"></font-awesome-icon>
             <br>map
-        </a>
-        <a class="nav-bar__btn" href="#">
+        </router-link>
+        <router-link to="/settings" class="nav-bar__btn">
             <font-awesome-icon icon="cog"></font-awesome-icon>
             <br>settings
-        </a>
+        </router-link>
     </div>
 </template>
 
@@ -44,7 +44,7 @@
             text-decoration: none;
             width: 32%;
             color: #999999;
-            padding: 0px;
+            padding: 0;
             float: left;
             border-right: 4px;
             border-right-style: dotted;
