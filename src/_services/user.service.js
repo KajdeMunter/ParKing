@@ -1,7 +1,7 @@
 import { authHeader } from '../_helpers/auth-header';
 
 const config = {
-	apiUrl: "http://localhost"
+	apiUrl: "http://145.24.222.166:8201"
 };
 
 export const userService = {
@@ -14,18 +14,18 @@ export const userService = {
 	delete: _delete
 };
 
-function login(username, password) {
+function login(email, password) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ username, password })
+		body: JSON.stringify({ email, password })
 	};
 
-	return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+	return fetch(`${config.apiUrl}/oauth/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
 			// login successful if there's a jwt token in the response
-			if (user.token) {
+			if (user.accessToken) {
 				// store user details and jwt token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('user', JSON.stringify(user));
 			}
@@ -46,7 +46,7 @@ function register(user) {
 		body: JSON.stringify(user)
 	};
 
-	return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+	return fetch(`${config.apiUrl}/oauth/register`, requestOptions).then(handleResponse);
 }
 
 function getAll() {

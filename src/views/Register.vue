@@ -3,19 +3,9 @@
         <h2>Register</h2>
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" v-model="user.firstName" v-validate="'required'" id="firstName" name="firstName" class="form-control" :class="{ 'is-invalid': submitted && errors.has('firstName') }" />
-                <div v-if="submitted && errors.has('firstName')" class="invalid-feedback">{{ errors.first('firstName') }}</div>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" v-model="user.lastName" v-validate="'required'" id="lastName" name="lastName" class="form-control" :class="{ 'is-invalid': submitted && errors.has('lastName') }" />
-                <div v-if="submitted && errors.has('lastName')" class="invalid-feedback">{{ errors.first('lastName') }}</div>
-            </div>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" v-model="user.username" v-validate="'required'" id="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && errors.has('username') }" />
-                <div v-if="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div>
+                <label for="email">Email</label>
+                <input type="email" v-model="user.email" v-validate="{ required: true, email: true }" id="email" name="email" class="form-control" :class="{ 'is-invalid': submitted && errors.has('email') }" />
+                <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
             </div>
             <div class="form-group">
                 <label htmlFor="password">Password</label>
@@ -38,9 +28,7 @@
 		data () {
 			return {
 				user: {
-					firstName: '',
-					lastName: '',
-					username: '',
+					email: '',
 					password: ''
 				},
 				submitted: false
