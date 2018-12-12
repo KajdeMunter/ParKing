@@ -6,4 +6,9 @@ RUN yarn install --frozen-lockfile --no-cache
 COPY . .
 RUN yarn run test:unit
 RUN yarn run build
-EXPOSE 8080
+
+# production stage
+FROM nginx:1.13.12-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
