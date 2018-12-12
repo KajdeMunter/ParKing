@@ -1,14 +1,14 @@
 <template>
     <div class="nav-bar">
-        <router-link class="nav-link nav-bar__btn" to="/list" href="#">
+        <router-link to="/" class="nav-link nav-bar__btn">
             <font-awesome-icon icon="bars" class="size"></font-awesome-icon>
             <br>list
         </router-link>
-        <router-link class="nav-link nav-bar__btn" to="/map" href="#">
+        <router-link to="/map" class="nav-link nav-bar__btn">
             <font-awesome-icon icon="map-marker-alt" class="size"></font-awesome-icon>
             <br>map
         </router-link>
-        <router-link class="nav-link nav-bar__btn" to="/settings" href="#">
+        <router-link to="/settings" class="nav-link nav-bar__btn">
             <font-awesome-icon icon="cog" class="size"></font-awesome-icon>
             <br>settings
         </router-link>
@@ -41,7 +41,7 @@
             text-decoration: none;
             width: 33%;
             color: #999999;
-            padding: 0px;
+            padding: 0;
             float: left;
 
             .size {
