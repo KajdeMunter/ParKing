@@ -6,4 +6,4 @@ services:
       context: .
       dockerfile: dockerfile.prod
     ports:
-      - 8300:80
+      - 8300:8080

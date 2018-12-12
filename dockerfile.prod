@@ -4,5 +4,6 @@ WORKDIR /app
 COPY package*.json yarn.lock ./
 RUN yarn install --frozen-lockfile --no-cache
 COPY . .
+EXPOSE 8080
 RUN yarn run test:unit
 RUN yarn run build
