@@ -12,8 +12,8 @@ library.add(faCoffee, faMapMarkerAlt, faCog, faBars);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 // setup fake backend
-import { configureFakeBackend } from '@/_helpers/fake-backend';
-configureFakeBackend();
+// import { configureFakeBackend } from '@/_helpers/fake-backend';
+// configureFakeBackend();
 
 Vue.config.productionTip = false;
 
