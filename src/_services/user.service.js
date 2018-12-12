@@ -9,7 +9,6 @@ export const userService = {
 	logout,
 	register,
 	getAll,
-	getById,
 	update,
 	delete: _delete
 };
@@ -24,9 +23,9 @@ function login(email, password) {
 	return fetch(`${config.apiUrl}/oauth/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
-			// login successful if there's a jwt token in the response
+			// login successful if there's a access token in the response
 			if (user.accessToken) {
-				// store user details and jwt token in local storage to keep user logged in between page refreshes
+				// store user details and access token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('user', JSON.stringify(user));
 			}
 
@@ -58,16 +57,6 @@ function getAll() {
 	return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
-
-function getById(id) {
-	const requestOptions = {
-		method: 'GET',
-		headers: authHeader()
-	};
-
-	return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
 function update(user) {
 	const requestOptions = {
 		method: 'PUT',
@@ -90,7 +79,6 @@ function _delete(id) {
 
 function handleResponse(response) {
 	return response.text().then(text => {
-		const data = text && JSON.parse(text);
 		if (!response.ok) {
 			if (response.status === 401) {
 				// auto logout if 401 response returned from api
@@ -98,10 +86,9 @@ function handleResponse(response) {
 				location.reload(true);
 			}
 
-			const error = (data && data.message) || response.statusText;
+			const error = text || text.message || response.statusText;
 			return Promise.reject(error);
 		}
-
-		return data;
+		return text;
 	});
 }
