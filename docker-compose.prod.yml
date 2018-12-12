@@ -5,5 +5,11 @@ services:
     build:
       context: .
       dockerfile: dockerfile.prod
+
+  nginx:
+    image: nginx:1.13.12-alpine
+    build:
+      context: .
+      dockerfile: dockerfile.prod
     ports:
-      - 8300:8080
+      - 8300:80
