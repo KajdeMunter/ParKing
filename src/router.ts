@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import notFoundPage from './views/errors/notFound.vue'
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
@@ -9,11 +8,6 @@ Vue.use(Router);
 
 export const router = new Router({
   routes: [
-      {
-        path: '/',
-        name: 'home',
-        component: Home,
-      },
       {
         path: '/login',
         name: 'login',
@@ -25,12 +19,28 @@ export const router = new Router({
           component: Register,
       },
       {
-        path: '/about',
-        name: 'about',
+        path: '/',
+        name: 'List',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+        component: () => import(/* webpackChunkName: "list" */ './views/List.vue'),
+      },
+      {
+          path: '/map',
+          name: 'Map',
+          // route level code-splitting
+          // this generates a separate chunk (about.[hash].js) for this route
+          // which is lazy-loaded when the route is visited.
+          component: () => import(/* webpackChunkName: "map" */ './views/Map.vue'),
+      },
+      {
+          path: '/settings',
+          name: 'Settings',
+          // route level code-splitting
+          // this generates a separate chunk (about.[hash].js) for this route
+          // which is lazy-loaded when the route is visited.
+          component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue'),
       },
       {
           path: '*',
