@@ -4,10 +4,12 @@ import router from './router';
 import store from './store';
 import './registerServiceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee, faMapMarkerAlt, faCog, faBars } from '@fortawesome/free-solid-svg-icons';
+
+import { faCoffee, faMapMarkerAlt, faCog, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faCoffee, faMapMarkerAlt, faCog, faBars);
+
+library.add(faCoffee, faMapMarkerAlt, faCog, faBars, faHeart);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

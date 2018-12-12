@@ -1,17 +1,17 @@
 <template>
     <div class="nav-bar">
-        <a class="nav-bar__btn" href="#">
-            <font-awesome-icon icon="bars"></font-awesome-icon>
+        <router-link class="nav-link nav-bar__btn" to="/list" href="#">
+            <font-awesome-icon icon="bars" class="size"></font-awesome-icon>
             <br>list
-        </a>
-        <a class="nav-bar__btn" href="#">
-            <font-awesome-icon icon="map-marker-alt"></font-awesome-icon>
+        </router-link>
+        <router-link class="nav-link nav-bar__btn" to="/map" href="#">
+            <font-awesome-icon icon="map-marker-alt" class="size"></font-awesome-icon>
             <br>map
-        </a>
-        <a class="nav-bar__btn" href="#">
-            <font-awesome-icon icon="cog"></font-awesome-icon>
+        </router-link>
+        <router-link class="nav-link nav-bar__btn" to="/settings" href="#">
+            <font-awesome-icon icon="cog" class="size"></font-awesome-icon>
             <br>settings
-        </a>
+        </router-link>
     </div>
 </template>
 
@@ -28,26 +28,26 @@
         overflow: auto;
         text-align: center;
         color: #999999;
-        font-size: 25px;
+        font-size: 15px;
         bottom: 0;
         left: 0;
         position: fixed;
         padding-top: 3px;
-        border-top: 3px;
-        border-top-style: ridge;
-        border-top-color: #006633;
-        box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2), 0 10px 25px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.19);
         display: block;
         margin: 0 auto;
 
         &__btn {
             text-decoration: none;
-            width: 32%;
+            width: 33%;
             color: #999999;
             padding: 0px;
             float: left;
-            border-right: 4px;
-            border-right-style: dotted;
+
+            .size {
+                font-size: 1.5em;
+            }
+
 
             &:focus {
                 color: #006633;
