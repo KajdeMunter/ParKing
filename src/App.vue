@@ -1,8 +1,10 @@
 <template>
     <div id="app">
-        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
-        <router-view></router-view>
-        <nav-bar></nav-bar>
+        <div class="app-bg">
+            <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
+            <router-view></router-view>
+            <nav-bar v-if="account.status.loggedIn"></nav-bar>
+        </div>
     </div>
 </template>
 
@@ -14,22 +16,23 @@
         name: 'app',
         computed: {
             ...mapState({
-                alert: state => state.alert
-            })
+                alert: state => state.alert,
+                account: state => state.account,
+            }),
         },
         methods: {
             ...mapActions({
-                clearAlert: 'alert/clear'
-            })
+                clearAlert: 'alert/clear',
+            }),
         },
         watch: {
             $route(to, from) {
                 // clear alert on location change
                 this.clearAlert();
-            }
+            },
         },
         components: {
-            NavBar
+            NavBar,
         },
     };
 </script>
@@ -43,7 +46,13 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
-        background-color: #006633
+        color: #fff;
+    }
+
+    .app-bg {
+        background: linear-gradient(to bottom right, #006633, #00bd52) center center no-repeat;
+        width: 100%;
+        min-height: 100%;
+        position: absolute;
     }
 </style>
