@@ -28,8 +28,9 @@
                 this.clearAlert();
             }
         },
-        components: {NavBar}
-
+        components: {
+            NavBar
+        },
     };
 </script>
 

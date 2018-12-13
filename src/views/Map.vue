@@ -1,16 +1,15 @@
 <template>
-    <div id="map">
-        <Header itemprop="Map"></Header>
+    <div>
+        <h1>Map</h1>
     </div>
 </template>
 
 <script>
-
-    export default {
-		name: "Map",
-    }
+	export default {
+		name: "Map"
+	}
 </script>
 
-<style lang="scss">
+<style scoped>
 
 </style>
