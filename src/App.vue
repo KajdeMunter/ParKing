@@ -1,8 +1,10 @@
 <template>
     <div id="app">
-        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
-        <router-view></router-view>
-        <nav-bar v-if="account.status.loggedIn"></nav-bar>
+        <div class="app-bg">
+            <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
+            <router-view></router-view>
+            <nav-bar v-if="account.status.loggedIn"></nav-bar>
+        </div>
     </div>
 </template>
 
@@ -44,7 +46,16 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
-        background-color: #006633
+        color: #fff;
+    }
+
+    .app-bg {
+        background-image: linear-gradient(to bottom right, #006633, #00bd52);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        height: 100%;
+        width: 100%;
     }
 </style>
