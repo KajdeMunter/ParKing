@@ -7,34 +7,35 @@
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex';
-	import NavBar from './components/NavBar';
+    import {mapState, mapActions} from 'vuex';
+    import NavBar from "./components/NavBar";
+    import Header from "./components/Header";
 
-	export default {
-		name: 'app',
-		computed: {
-			...mapState({
-				alert: state => state.alert
-			})
-		},
-		methods: {
-			...mapActions({
-				clearAlert: 'alert/clear'
-			})
-		},
-		watch: {
-			$route (to, from){
-				// clear alert on location change
-				this.clearAlert();
-			}
-		},
-		components: {NavBar}
-	};
+    export default {
+        name: 'app',
+        computed: {
+            ...mapState({
+                alert: state => state.alert
+            })
+        },
+        methods: {
+            ...mapActions({
+                clearAlert: 'alert/clear'
+            })
+        },
+        watch: {
+            $route(to, from) {
+                // clear alert on location change
+                this.clearAlert();
+            }
+        },
+        components: {NavBar, Header}
+
+    };
 </script>
 
 <style lang="scss">
     @import '~bootstrap-scss/bootstrap';
-
 
     #app {
         font-family: "Yu Gothic UI", "Yu Gothic UI Light", serif;

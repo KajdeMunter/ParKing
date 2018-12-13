@@ -1,7 +1,7 @@
 <template>
     <div id="list">
         <font-awesome-icon icon="bars" class="hdr"></font-awesome-icon>
-        <h1>Address list</h1>
+        <h1>List</h1>
         <nav>
             <ul class="fav-icon">
                 <li>Wijnhaven 99, 3011 WN Rotterdam
@@ -96,19 +96,10 @@
 </template>
 
 <script>
-    export default {
-        name: "List"
-    }
+
 </script>
 
 <style scoped lang="scss">
-    h1 {
-        color: #ffffff;
-        display: inline;
-        position: relative;
-
-    }
-
     .fav-icon {
         color: #999999;
         float: left;
@@ -116,22 +107,18 @@
         margin: fill;
         padding-left: 0;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
-
-
     }
 
     li {
         text-align: left;
         float: initial;
-        border: #FFFFFF 1px;
+        border-bottom: #006633 1px;
         border-bottom-style: solid;
-        border-top-style: solid;
         margin: 1px;
-        padding: 30px;
+        padding: 40px;
         font-size: 1em;
         list-style-type: none;
         background-color: #ffffff;
-
 
 
     }
@@ -139,7 +126,9 @@
     .icon {
         color: #7e838c;
         font-size: 1em;
-
+        position: relative;
+        alignment: center;
+        margin-bottom: 5px;
 
     }
 
@@ -152,7 +141,16 @@
         border: none;
         background: none;
         font-size: 1.5em;
+        alignment: center;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
 
+    }
+
+    h1 {
+        color: #ffffff;
+        display: inline;
+        position: relative;
     }
 
     .hdr {
@@ -160,6 +158,12 @@
         font-size: 2em;
         position: relative;
         right: 20px;
+    }
 
+
+    @media only screen and (max-width: 366px) {
+        li {
+            padding: 30px 10px 30px 10px;
+        }
     }
 </style>
