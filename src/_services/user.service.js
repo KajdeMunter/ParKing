@@ -1,7 +1,7 @@
 import { authHeader } from '../_helpers/auth-header';
 
 const config = {
-	apiUrl: "https://145.24.222.166:8201"
+	apiUrl: "https://parking.onthewifi.com:8072"
 };
 
 export const userService = {
