@@ -50,12 +50,9 @@
     }
 
     .app-bg {
-        background-image: linear-gradient(to bottom right, #006633, #00bd52);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: absolute;
-        height: 100%;
+        background: linear-gradient(to bottom right, #006633, #00bd52) center center no-repeat;
         width: 100%;
+        min-height: 100%;
+        position: absolute;
     }
 </style>
