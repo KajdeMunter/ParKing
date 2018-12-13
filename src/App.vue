@@ -9,7 +9,6 @@
 <script>
     import {mapState, mapActions} from 'vuex';
     import NavBar from "./components/NavBar";
-    import Header from "./components/Header";
 
     export default {
         name: 'app',
@@ -29,7 +28,7 @@
                 this.clearAlert();
             }
         },
-        components: {NavBar, Header}
+        components: {NavBar}
 
     };
 </script>
