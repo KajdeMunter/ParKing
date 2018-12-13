@@ -21,7 +21,7 @@
             </li>
         </ul>
         <p>
-            <router-link to="/login">Logout</router-link>
+            <router-link to="/login" class="btn btn-danger">Logout</router-link>
         </p>
     </div>
 </template>

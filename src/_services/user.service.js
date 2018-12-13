@@ -1,7 +1,7 @@
 import { authHeader } from '../_helpers/auth-header';
 
 const config = {
-	apiUrl: "http://localhost"
+	apiUrl: "https://parking.onthewifi.com:8072"
 };
 
 export const userService = {
@@ -9,24 +9,24 @@ export const userService = {
 	logout,
 	register,
 	getAll,
-	getById,
 	update,
 	delete: _delete
 };
 
-function login(username, password) {
+function login(email, password) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ username, password })
+		body: JSON.stringify({ email, password })
 	};
 
-	return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+	return fetch(`${config.apiUrl}/oauth/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
-			// login successful if there's a jwt token in the response
-			if (user.token) {
-				// store user details and jwt token in local storage to keep user logged in between page refreshes
+			user = JSON.parse(user);
+			// login successful if there's a access token in the response
+			if (user.accessToken) {
+				// store user details and access token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('user', JSON.stringify(user));
 			}
 
@@ -46,7 +46,7 @@ function register(user) {
 		body: JSON.stringify(user)
 	};
 
-	return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+	return fetch(`${config.apiUrl}/oauth/register`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
@@ -56,16 +56,6 @@ function getAll() {
 	};
 
 	return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
-
-
-function getById(id) {
-	const requestOptions = {
-		method: 'GET',
-		headers: authHeader()
-	};
-
-	return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
@@ -90,7 +80,6 @@ function _delete(id) {
 
 function handleResponse(response) {
 	return response.text().then(text => {
-		const data = text && JSON.parse(text);
 		if (!response.ok) {
 			if (response.status === 401) {
 				// auto logout if 401 response returned from api
@@ -98,10 +87,10 @@ function handleResponse(response) {
 				location.reload(true);
 			}
 
-			const error = (data && data.message) || response.statusText;
+			const error = text || text.message || response.statusText;
 			return Promise.reject(error);
 		}
 
-		return data;
+		return text;
 	});
 }
