@@ -2,7 +2,7 @@
     <div id="app">
         <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
         <router-view></router-view>
-        <nav-bar></nav-bar>
+        <nav-bar v-if="account.status.loggedIn"></nav-bar>
     </div>
 </template>
 
@@ -14,22 +14,23 @@
         name: 'app',
         computed: {
             ...mapState({
-                alert: state => state.alert
-            })
+                alert: state => state.alert,
+                account: state => state.account,
+            }),
         },
         methods: {
             ...mapActions({
-                clearAlert: 'alert/clear'
-            })
+                clearAlert: 'alert/clear',
+            }),
         },
         watch: {
             $route(to, from) {
                 // clear alert on location change
                 this.clearAlert();
-            }
+            },
         },
         components: {
-            NavBar
+            NavBar,
         },
     };
 </script>
