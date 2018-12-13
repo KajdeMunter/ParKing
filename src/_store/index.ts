@@ -8,10 +8,6 @@ import { account } from './_modules/account.module'
 Vue.use(Vuex);
 Vue.use(VeeValidate);
 
-// setup fake backend
-import { configureFakeBackend } from '../_helpers/fake-backend.js';
-configureFakeBackend();
-
 export default new Vuex.Store({
     modules: {
         users,

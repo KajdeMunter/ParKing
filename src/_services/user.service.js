@@ -23,6 +23,7 @@ function login(email, password) {
 	return fetch(`${config.apiUrl}/oauth/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
+			user = JSON.parse(user);
 			// login successful if there's a access token in the response
 			if (user.accessToken) {
 				// store user details and access token in local storage to keep user logged in between page refreshes
@@ -89,6 +90,7 @@ function handleResponse(response) {
 			const error = text || text.message || response.statusText;
 			return Promise.reject(error);
 		}
+
 		return text;
 	});
 }
