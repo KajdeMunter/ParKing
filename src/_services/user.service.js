@@ -20,7 +20,7 @@ function login(email, password) {
 		body: JSON.stringify({ email, password })
 	};
 
-	return fetch(`${config.apiUrl}/oauth/login`, requestOptions)
+	return fetch(`${config.apiUrl}/oauth/user/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
 			user = JSON.parse(user);
@@ -34,7 +34,7 @@ function login(email, password) {
 		});
 }
 
-function logout() {
+export function logout() {
 	// remove user from local storage to log user out
 	localStorage.removeItem('user');
 }
@@ -46,7 +46,7 @@ function register(user) {
 		body: JSON.stringify(user)
 	};
 
-	return fetch(`${config.apiUrl}/oauth/register`, requestOptions).then(handleResponse);
+	return fetch(`${config.apiUrl}/oauth/user/register`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
