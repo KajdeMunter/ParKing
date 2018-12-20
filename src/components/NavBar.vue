@@ -37,30 +37,30 @@
         display: block;
         margin: 0 auto;
 
-        &__btn {
+        &__btn { // .nav-bar__btn
             text-decoration: none;
             width: 33%;
             color: #999999;
             padding: 0;
             float: left;
 
-            .size {
-                font-size: 1.5em;
-            }
-
-
-            &:focus {
+            &:focus { // .nav-bar__btn:focus
                 color: #006633;
                 border-right-color: #999999;
             }
 
-            &:hover {
+            &:hover { // .nav-bar__btn:hover
                 color: #009933;
             }
 
-            &:last-child {
+            &:last-child { // .nav-bar__btn:last-child
                 border: none;
             }
+
+            .size { // .nav-bar__btn .size
+                font-size: 1.5em;
+            }
+
         }
     }
 </style>

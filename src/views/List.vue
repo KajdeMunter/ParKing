@@ -4,7 +4,7 @@
         <h1>List</h1>
         <nav>
             <ul class="fav-icon">
-                <li v-for="i in (10)">Wijnhaven 99, 3011 WN Rotterdam
+                <li v-for="marker in markers.items">{{ marker.id }}
                     <button>
                         <font-awesome-icon icon="heart" class="icon"></font-awesome-icon>
                     </button>
@@ -15,8 +15,23 @@
 </template>
 
 <script>
-    export default {
+	import {mapState, mapActions} from 'vuex';
+
+	export default {
         name: "List",
+	    computed: {
+		    ...mapState({
+			    markers: state => state.markers.all
+		    })
+	    },
+	    methods: {
+		    ...mapActions('markers', {
+			    getAllMarkers: 'getAll'
+		    })
+	    },
+	    async mounted() {
+		    await this.getAllMarkers();
+	    },
     }
 </script>
 
