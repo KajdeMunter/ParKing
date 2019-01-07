@@ -54,5 +54,6 @@
         width: 100%;
         min-height: 100%;
         position: absolute;
+        padding-bottom: 34px;
     }
 </style>
