@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>Register</h2>
         <img src="../assets/ParKing-Logo.png" class="logo" alt="none">
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
@@ -18,10 +17,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" :disabled="status.registering">Register</button>
+                <button class="button--register" :disabled="status.registering">Register</button>
                 <img v-show="status.registering"
                      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                <router-link to="/login" class="btn btn-link">Cancel</router-link>
+                <router-link to="/login" class="button--cancel">Cancel</router-link>
             </div>
         </form>
     </div>
@@ -64,7 +63,47 @@
         alignment: center;
         position: center;
         margin: auto;
+
+        .button--register{
+            background-color: rgb(153,153,153);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 10px 8px;
+
+
+        }
+        .button--cancel{
+            color: #ffffff;
+
+        }
+
+        .button--register:active{
+            outline-color: rgb(200,193,198);
+            box-shadow: none;
+            border: none;
+
+        }
+
+        .button--register:focus{
+            outline-color: rgb(200,193,198);
+            box-shadow: none;
+            border: none;
+        }
+
+        .button--register:hover{
+            text-decoration: underline;
+        }
+
+        .button--register:active:focus{
+            box-shadow: none;
+            border: none;
+            text-decoration: underline;
+        }
     }
+
+
 
 
 
