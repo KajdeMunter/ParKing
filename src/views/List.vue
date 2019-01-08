@@ -3,7 +3,7 @@
         <font-awesome-icon icon="bars" class="hdr"></font-awesome-icon>
         <h1>List</h1>
         <detect-network v-on:detected-condition="detected">
-            <div slot="offline">
+            <div slot="online">
                 <nav>
                     <ul class="fav-icon">
                         <li v-for="marker in markers.items">{{ marker.id }}
@@ -14,7 +14,7 @@
                     </ul>
                 </nav>
             </div>
-            <div slot="online">
+            <div slot="offline">
                 <h3 class="conn-err">Please connect to a network connection to use ParKing.</h3>
             </div>
         </detect-network>
