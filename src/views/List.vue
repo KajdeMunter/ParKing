@@ -2,36 +2,55 @@
     <div id="list">
         <font-awesome-icon icon="bars" class="hdr"></font-awesome-icon>
         <h1>List</h1>
-        <nav>
-            <ul class="fav-icon">
-                <li v-for="marker in markers.items">{{ marker.id }}
-                    <button>
-                        <font-awesome-icon icon="heart" class="icon"></font-awesome-icon>
-                    </button>
-                </li>
-            </ul>
-        </nav>
+        <detect-network v-on:detected-condition="detected">
+            <div slot="offline">
+                <nav>
+                    <ul class="fav-icon">
+                        <li v-for="marker in markers.items">{{ marker.id }}
+                            <button>
+                                <font-awesome-icon icon="heart" class="icon"></font-awesome-icon>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div slot="online">
+                <h3 class="conn-err">Please connect to a network connection to use ParKing.</h3>
+            </div>
+        </detect-network>
     </div>
 </template>
 
 <script>
 	import {mapState, mapActions} from 'vuex';
+	import detectNetwork from 'v-offline';
 
 	export default {
         name: "List",
 	    computed: {
 		    ...mapState({
 			    markers: state => state.markers.all
-		    })
+		    }),
 	    },
+		data() {
+			return {
+				state: null,
+			}
+		},
 	    methods: {
 		    ...mapActions('markers', {
 			    getAllMarkers: 'getAll'
-		    })
+		    }),
+		    detected(e) {
+			    this.state = e;
+		    },
 	    },
 	    async mounted() {
 		    await this.getAllMarkers();
 	    },
+        components: {
+        	detectNetwork,
+        }
     }
 </script>
 
