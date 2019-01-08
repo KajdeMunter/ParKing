@@ -1,14 +1,22 @@
 <template>
     <div>
         <h1>Map</h1>
-        <div class="OpenBoxMap__container">
-            <div id="OpenBoxMap"></div>
-        </div>
+        <detect-network v-on:detected-condition="detected">
+            <div slot="online">
+                <div class="OpenBoxMap__container">
+                    <div id="OpenBoxMap"></div>
+                </div>
+            </div>
+            <div slot="offline">
+                <h3 class="conn-err">Please connect to a network connection to use ParKing.</h3>
+            </div>
+        </detect-network>
     </div>
 </template>
 
 <script>
 	import {mapState, mapActions} from 'vuex';
+	import detectNetwork from 'v-offline';
 	const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 	export default {
@@ -17,6 +25,11 @@
 			...mapState({
 				markers: state => state.markers.all
 			})
+		},
+		data() {
+			return {
+				state: null,
+			}
 		},
         async mounted() {
 	        await this.getAllMarkers();
@@ -52,12 +65,21 @@
 		methods: {
 			...mapActions('markers', {
 				getAllMarkers: 'getAll'
-			})
-		}
+			}),
+			detected(e) {
+				this.state = e;
+			},
+		},
+        components: {
+			detectNetwork
+        }
 	}
 </script>
 
 <style lang="scss">
+    .conn-err {
+        color: red;
+    }
     .OpenBoxMap__container {
         text-align: left;
     }
