@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { userService } from '../../_services/user.service.js';
+import { userService} from '../../_services/user.service.js';
 import { router } from '../../router';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -90,6 +90,24 @@ export const account = {
                         dispatch('alert/error', error, { root: true });
                     }
                 );
-        }
+        },
+        mailCheck({ dispatch, commit }, email) {
+            userService.mailCheck(email)
+                .then(
+                    response => {
+                        // display success message after route change completes
+                        if ((email.indexOf('@') === -1) || (email.indexOf('.') === -1)) {
+                            dispatch('alert/error', 'Email is invalid', { root: true });
+                        } else {
+                            console.log(email.indexOf('@'));
+                            dispatch('alert/success', 'Email is available', { root: true });
+                        }
+                    },
+                    error => {
+                        commit('registerFailure', error);
+                        dispatch('alert/error', error, { root: true });
+                    }
+                );
+        },
     }
 };
