@@ -4,15 +4,14 @@
         <h1>List</h1>
         <detect-network v-on:detected-condition="detected">
             <div slot="online">
-                <nav>
-                    <ul class="fav-icon">
-                        <li v-for="marker in markers.items">{{ marker.id }}
-                            <button>
-                                <font-awesome-icon icon="heart" class="icon"></font-awesome-icon>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="marker-list padding-0">
+                    <li v-for="marker in markers.items" class="marker-item row">
+                        <div class="marker-street col-10 padding-0">{{ marker.id }}</div>
+                        <div class="marker-favorite col-2 padding-0">
+                            <a><font-awesome-icon icon="heart" class="marker-favorite__icon"></font-awesome-icon></a>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div slot="offline">
                 <h3 class="conn-err">Please connect to a network connection to use ParKing.</h3>
@@ -55,50 +54,46 @@
 </script>
 
 <style scoped lang="scss">
-    .fav-icon {
-        color: #999999;
-        float: left;
-        width: 100%;
-        margin: fill;
-        padding-left: 0;
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+    .padding-0 {
+        padding: 0;
     }
 
-    li {
-        text-align: left;
-        float: initial;
-        border-bottom: #006633 1px;
-        border-bottom-style: solid;
-        margin: 1px;
-        padding: 40px;
-        font-size: 1em;
-        list-style-type: none;
-        background-color: #ffffff;
+    .marker {
+        &-list {
+            text-align: left;
+            list-style-type: none;
+            color: #999999;
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+        }
 
+        &-item {
+            padding: 5px 0 5px 5px;
+            margin: 0;
+            border-bottom: #006633 1px;
+            border-bottom-style: solid;
+            font-size: 1em;
+            background-color: #ffffff;
+        }
 
-    }
+        &-street {
+            line-height: 33px;
+        }
 
-    .icon {
-        color: #7e838c;
-        font-size: 1em;
-        position: relative;
-        alignment: center;
-        margin-bottom: 5px;
+        &-favorite {
+            margin-bottom: auto;
+            margin-top: auto;
+            text-align: center;
 
-    }
+            &__icon {
+                color: #7e838c;
+                font-size: 1em;
+            }
 
-
-    button {
-        position: relative;
-        color: #7e838c;
-        float: right;
-        size: 20px;
-        border: none;
-        background: none;
-        font-size: 1.5em;
-        alignment: center;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
+            a {
+                color: #7e838c;
+                font-size: 1.5em;
+            }
+        }
 
     }
 
@@ -113,12 +108,5 @@
         font-size: 2em;
         position: relative;
         right: 20px;
-    }
-
-
-    @media only screen and (max-width: 366px) {
-        li {
-            padding: 30px 10px 30px 10px;
-        }
     }
 </style>
