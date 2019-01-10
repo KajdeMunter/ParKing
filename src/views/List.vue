@@ -5,11 +5,23 @@
         <detect-network v-on:detected-condition="detected">
             <div slot="online">
                 <ul class="marker-list padding-0">
-                    <li v-for="marker in markers.items" class="marker-item row">
-                        <div class="marker-street col-10 padding-0">{{ marker.id }}</div>
+                    <li v-for="streetname in getDistinctStreetnames()" class="marker-item row" v-on:click.prevent="toggledropdown(streetname)">
+                        <div class="marker-street col-10 padding-0">
+                            {{ streetname }}
+                            <font-awesome-icon icon="caret-down"></font-awesome-icon>
+                        </div>
                         <div class="marker-favorite col-2 padding-0">
                             <a><font-awesome-icon icon="heart" class="marker-favorite__icon"></font-awesome-icon></a>
                         </div>
+                        <transition name="slide">
+                            <div v-if="(droppedDownStreet === streetname) && (showDropDown)" class="marker-housenumbers">
+                                <div v-for="number in getDistinctHouseNumbersByStreetname(streetname)">
+                                    <div class="marker-street col-12 padding-0">
+                                        {{ number }}
+                                    </div>
+                                </div>
+                            </div>
+                        </transition>
                     </li>
                 </ul>
             </div>
@@ -34,6 +46,8 @@
 		data() {
 			return {
 				state: null,
+				showDropDown: true,
+                droppedDownStreet: ''
 			}
 		},
 	    methods: {
@@ -43,6 +57,19 @@
 		    detected(e) {
 			    this.state = e;
 		    },
+            getDistinctStreetnames() {
+	            return (_.keys(_.countBy(this.markers.items, function(data) { return data.streetName; })));
+            },
+            getDistinctHouseNumbersByStreetname(streetname) {
+		    	const numbers = _.filter(this.markers.items, {streetName: streetname});
+	            return _.keys(_.countBy(numbers, function(data) { return data.houseNumber; }));
+            },
+            toggledropdown(streetname) {
+		    	if (this.droppedDownStreet === streetname) {
+				    this.showDropDown = !this.showDropDown;
+			    }
+                this.droppedDownStreet = streetname;
+            },
 	    },
 	    async mounted() {
 		    await this.getAllMarkers();
@@ -54,6 +81,10 @@
 </script>
 
 <style scoped lang="scss">
+    .slide-enter, .slide-leave-to{
+        transform: scaleY(0);
+    }
+
     .padding-0 {
         padding: 0;
     }
@@ -77,6 +108,8 @@
 
         &-street {
             line-height: 33px;
+            transform-origin: top;
+            transition: .4s ease-in-out;
         }
 
         &-favorite {
@@ -93,6 +126,11 @@
                 color: #7e838c;
                 font-size: 1.5em;
             }
+        }
+
+        &-housenumbers {
+            transform-origin: top;
+            transition: transform .4s ease-in-out;
         }
 
     }

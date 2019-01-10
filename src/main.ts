@@ -6,9 +6,9 @@ import './registerServiceWorker';
 
 // Font awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee, faMapMarkerAlt, faCog, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faMapMarkerAlt, faCog, faBars, faHeart, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faCoffee, faMapMarkerAlt, faCog, faBars, faHeart);
+library.add(faCoffee, faMapMarkerAlt, faCog, faBars, faHeart, faCaretDown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;

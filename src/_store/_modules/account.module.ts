@@ -99,7 +99,6 @@ export const account = {
                         if ((email.indexOf('@') === -1) || (email.indexOf('.') === -1)) {
                             dispatch('alert/error', 'Email is invalid', { root: true });
                         } else {
-                            console.log(email.indexOf('@'));
                             dispatch('alert/success', 'Email is available', { root: true });
                         }
                     },
