@@ -5,11 +5,24 @@
         <detect-network v-on:detected-condition="detected">
             <div slot="online">
                 <ul class="marker-list padding-0">
-                    <li v-for="marker in markers.items" class="marker-item row">
-                        <div class="marker-street col-10 padding-0">{{ marker.id }}</div>
+                    <li v-for="streetname in getDistinctStreetnames()" class="marker-item row">
+                        <div class="marker-street col-10 padding-0" v-on:click.prevent="toggledropdown(streetname)">
+                            {{ streetname }}
+                            <font-awesome-icon icon="caret-down"></font-awesome-icon>
+                        </div>
                         <div class="marker-favorite col-2 padding-0">
                             <a><font-awesome-icon icon="heart" class="marker-favorite__icon"></font-awesome-icon></a>
                         </div>
+                        <transition name="slide">
+                            <div v-if="(droppedDownStreet === streetname) && (showDropDown)" class="marker-housenumbers">
+                                <a v-for="number in getDistinctHouseNumbersByStreetname(streetname)" v-bind:href="getNavUrl(streetname, number)" class="marker-housenumbers__nav">
+                                    <div class="marker-street col-12 padding-0">
+                                        {{ number }}
+                                        <font-awesome-icon icon="location-arrow" class="marker-arrow"></font-awesome-icon>
+                                    </div>
+                                </a>
+                            </div>
+                        </transition>
                     </li>
                 </ul>
             </div>
@@ -34,6 +47,8 @@
 		data() {
 			return {
 				state: null,
+				showDropDown: false,
+                droppedDownStreet: ''
 			}
 		},
 	    methods: {
@@ -43,6 +58,23 @@
 		    detected(e) {
 			    this.state = e;
 		    },
+            getDistinctStreetnames() {
+	            return _.keys(_.countBy(this.markers.items, (data) => { return data.streetName; }));
+            },
+            getDistinctHouseNumbersByStreetname(streetname) {
+		    	const numbers = _.filter(this.markers.items, {streetName: streetname});
+	            return _.keys(_.countBy(numbers, (data) => { return data.houseNumber; }));
+            },
+            toggledropdown(streetname) {
+	            this.droppedDownStreet = streetname;
+
+	            if (this.droppedDownStreet === streetname) {
+				    this.showDropDown = !this.showDropDown;
+			    }
+            },
+            getNavUrl(street, number) {
+		    	return 'https://www.google.com/maps?saddr=My+Location&daddr=' + street + '+' + number;
+            }
 	    },
 	    async mounted() {
 		    await this.getAllMarkers();
@@ -54,6 +86,10 @@
 </script>
 
 <style scoped lang="scss">
+    .slide-enter, .slide-leave-to{
+        transform: scaleY(0);
+    }
+
     .padding-0 {
         padding: 0;
     }
@@ -77,6 +113,12 @@
 
         &-street {
             line-height: 33px;
+            transform-origin: top;
+            transition: .4s ease-in-out;
+
+            .marker-arrow {
+                color: #006633;
+            }
         }
 
         &-favorite {
@@ -92,6 +134,16 @@
             a {
                 color: #7e838c;
                 font-size: 1.5em;
+            }
+        }
+
+        &-housenumbers {
+            transform-origin: top;
+            transition: transform .4s ease-in-out;
+
+            &__nav {
+                color: inherit;
+                text-decoration: none;
             }
         }
 
