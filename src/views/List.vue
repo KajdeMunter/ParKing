@@ -58,6 +58,7 @@
 		    detected(e) {
 			    this.state = e;
 		    },
+            // TODO: get only distinct streetnames that have available parking spots
             getDistinctStreetnames() {
 	            return _.keys(_.countBy(this.markers.items, (data) => { return data.streetName; }));
             },
