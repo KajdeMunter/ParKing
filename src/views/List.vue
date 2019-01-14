@@ -5,8 +5,8 @@
         <detect-network v-on:detected-condition="detected">
             <div slot="online">
                 <ul class="marker-list padding-0">
-                    <li v-for="streetname in getDistinctStreetnames()" class="marker-item row" v-on:click.prevent="toggledropdown(streetname)">
-                        <div class="marker-street col-10 padding-0">
+                    <li v-for="streetname in getDistinctStreetnames()" class="marker-item row">
+                        <div class="marker-street col-10 padding-0" v-on:click.prevent="toggledropdown(streetname)">
                             {{ streetname }}
                             <font-awesome-icon icon="caret-down"></font-awesome-icon>
                         </div>
@@ -15,11 +15,12 @@
                         </div>
                         <transition name="slide">
                             <div v-if="(droppedDownStreet === streetname) && (showDropDown)" class="marker-housenumbers">
-                                <div v-for="number in getDistinctHouseNumbersByStreetname(streetname)">
+                                <a v-for="number in getDistinctHouseNumbersByStreetname(streetname)" v-bind:href="getNavUrl(streetname, number)" class="marker-housenumbers__nav">
                                     <div class="marker-street col-12 padding-0">
                                         {{ number }}
+                                        <font-awesome-icon icon="location-arrow" class="marker-arrow"></font-awesome-icon>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </transition>
                     </li>
@@ -71,6 +72,9 @@
 				    this.showDropDown = !this.showDropDown;
 			    }
             },
+            getNavUrl(street, number) {
+		    	return 'https://www.google.com/maps?saddr=My+Location&daddr=' + street + '+' + number;
+            }
 	    },
 	    async mounted() {
 		    await this.getAllMarkers();
@@ -111,6 +115,10 @@
             line-height: 33px;
             transform-origin: top;
             transition: .4s ease-in-out;
+
+            .marker-arrow {
+                color: #006633;
+            }
         }
 
         &-favorite {
@@ -132,6 +140,11 @@
         &-housenumbers {
             transform-origin: top;
             transition: transform .4s ease-in-out;
+
+            &__nav {
+                color: inherit;
+                text-decoration: none;
+            }
         }
 
     }
