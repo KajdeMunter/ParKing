@@ -24,11 +24,12 @@
 		computed: {
 			...mapState({
 				markers: state => state.markers.all
-			})
+			}),
 		},
 		data() {
 			return {
 				state: null,
+                mapMarkers: [],
 			}
 		},
         async mounted() {
@@ -43,29 +44,44 @@
 		        zoom: 12.0
 	        });
 
-            this.markers.items.forEach(function(marker) {
-		        // create a HTML element for each feature
-		        let el = document.createElement('div');
-	            let link = 'https://www.google.com/maps?saddr=My+Location&daddr=' + marker.latitude + ',' + marker.longitude;
-	            let headerText = marker.available ? 'Parking spot available' : 'Parking spot occupied';
-                let html = '<div class="marker__popup">' +
-                                '<h3 class="marker__popup__header">' + headerText + '</h3>' +
-                                '<a class="marker__popup__link" href="' + link + '">Navigate to parking place</a>' +
-                            '</div>';
+            this.loadMapMarkers(map, this.markers);
 
-		        el.className = marker.available ? 'marker marker--available' : 'marker marker--occupied';
-		        new mapboxgl.Marker(el)
-			        .setLngLat([marker.longitude, marker.latitude])
-			        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                    .setHTML(html))
-                    .addTo(map);
-	        });
+	        setInterval(async function () {
+		        await this.mapMarkers.forEach((marker => marker.remove()));
+		        this.mapMarkers = [];
+
+		        await this.getAllMarkers();
+		        await this.loadMapMarkers(map, this.markers);
+	        }.bind(this), 30000);
 
         },
 		methods: {
 			...mapActions('markers', {
 				getAllMarkers: 'getAll'
 			}),
+            loadMapMarkers(map, markers) {
+	            markers.items.forEach((marker) => {
+		            // create a HTML element for each feature
+		            let el = document.createElement('div');
+		            let link = 'https://www.google.com/maps?saddr=My+Location&daddr=' + marker.latitude + ',' + marker.longitude;
+		            let headerText = marker.available ? 'Parking spot available' : 'Parking spot occupied';
+		            let html = '<div class="marker__popup">' +
+			            '<h3 class="marker__popup__header">' + headerText + '</h3>' +
+			            '<a class="marker__popup__link" href="' + link + '">Navigate to parking place</a>' +
+			            '</div>';
+
+		            el.className = marker.available ? 'marker marker--available' : 'marker marker--occupied';
+
+		            const mapMarker = new mapboxgl.Marker(el)
+			            .setLngLat([marker.longitude, marker.latitude])
+			            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+				            .setHTML(html));
+
+		            this.mapMarkers.push(mapMarker);
+
+                    mapMarker.addTo(map);
+	            });
+            },
 			detected(e) {
 				this.state = e;
 			},
