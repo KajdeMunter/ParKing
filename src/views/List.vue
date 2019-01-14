@@ -46,7 +46,7 @@
 		data() {
 			return {
 				state: null,
-				showDropDown: true,
+				showDropDown: false,
                 droppedDownStreet: ''
 			}
 		},
@@ -58,17 +58,18 @@
 			    this.state = e;
 		    },
             getDistinctStreetnames() {
-	            return (_.keys(_.countBy(this.markers.items, function(data) { return data.streetName; })));
+	            return _.keys(_.countBy(this.markers.items, (data) => { return data.streetName; }));
             },
             getDistinctHouseNumbersByStreetname(streetname) {
 		    	const numbers = _.filter(this.markers.items, {streetName: streetname});
-	            return _.keys(_.countBy(numbers, function(data) { return data.houseNumber; }));
+	            return _.keys(_.countBy(numbers, (data) => { return data.houseNumber; }));
             },
             toggledropdown(streetname) {
-		    	if (this.droppedDownStreet === streetname) {
+	            this.droppedDownStreet = streetname;
+
+	            if (this.droppedDownStreet === streetname) {
 				    this.showDropDown = !this.showDropDown;
 			    }
-                this.droppedDownStreet = streetname;
             },
 	    },
 	    async mounted() {
