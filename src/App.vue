@@ -41,10 +41,7 @@
     @import '~bootstrap-scss/bootstrap';
 
     #app {
-        font-family: "Yu Gothic UI", "Yu Gothic UI Light", serif;
-        font-feature-settings: normal;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        font-family: "arial", sans-serif;
         text-align: center;
         color: #fff;
     }
@@ -54,6 +51,6 @@
         width: 100%;
         min-height: 100%;
         position: absolute;
-        padding-bottom: 34px;
+        //padding-bottom: 34px;
     }
 </style>
