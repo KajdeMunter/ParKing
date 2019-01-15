@@ -10,7 +10,8 @@ export const userService = {
 	register,
 	getAll,
 	update,
-	delete: _delete
+	delete: _delete,
+	mailCheck
 };
 
 function login(email, password) {
@@ -47,6 +48,16 @@ function register(user) {
 	};
 
 	return fetch(`${config.apiUrl}/oauth/user/register`, requestOptions).then(handleResponse);
+}
+
+export function mailCheck(email) {
+	const requestOptions = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ 'email': email })
+	};
+
+	return fetch(`${config.apiUrl}/oauth/user/mailcheck`, requestOptions).then(handleResponse);
 }
 
 function getAll() {

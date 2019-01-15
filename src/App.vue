@@ -2,7 +2,9 @@
     <div id="app">
         <div class="app-bg">
             <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
             <nav-bar v-if="account.status.loggedIn"></nav-bar>
         </div>
     </div>
