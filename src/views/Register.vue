@@ -3,17 +3,16 @@
         <img src="../assets/ParKing-Logo.png" class="logo" alt="none">
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" v-model="user.email" v-validate="{ required: true, email: true }" id="email"
-                       name="email" class="form-control" :class="{ 'is-invalid': submitted && errors.has('email') }"/>
+                <input type="email" placeholder="email" v-model="user.email" v-validate="{ required: true, email: true }" id="email"
+                       name="email" class="form-input form-input--email" :class="{ 'is-invalid': submitted && errors.has('email') }"/>
+                        <font-awesome-icon icon="envelope" class="form-input--email__icon-envelope"></font-awesome-icon>
                 <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
             </div>
             <div class="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" v-model="user.password" v-validate="{ required: true, min: 8 }" name="password"
-                       class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }"/>
-                <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password')
-                    }}
+                <input type="password" placeholder="password" v-model="user.password" v-validate="{ required: true, min: 8 }" name="password"
+                       class="form-input form-input--password" :class="{ 'is-invalid': submitted && errors.has('password') }"/>
+                        <font-awesome-icon icon="key" class="form-input--password__icon-key"></font-awesome-icon>
+                <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}
                 </div>
             </div>
             <div class="form-group">
@@ -57,7 +56,6 @@
 </script>
 
 <style lang="scss">
-
     .form-group {
         width: 200px;
         alignment: center;
@@ -71,19 +69,15 @@
             border-radius: 5px;
             padding: 5px 10px;
             margin: 10px 8px;
-
-
         }
         .button--cancel{
             color: #ffffff;
-
         }
 
         .button--register:active{
             outline-color: rgb(200,193,198);
             box-shadow: none;
             border: none;
-
         }
 
         .button--register:focus{
@@ -103,8 +97,64 @@
         }
     }
 
+    .form-input {
+        border: none;
+        background: none;
+        border-bottom: 1px solid #ffffff;
+        position: relative;
+        alignment: center;
+        color: #ffffff;
+        padding-right: 17px;
 
+        &::placeholder {
+            color: #ffffff;
+            align-items: center;
+        }
+    }
 
+    .form-input {
+        &--email {
+            margin-right: 15px;
+            margin-top: 25px;
+            alignment: center;
+            padding-top: 20px;
 
+            &__icon-envelope {
+                alignment: left;
+                position: relative;
+                bottom: 25px;
+                left: 70px;
+            }
+        }
 
+        &--password {
+            padding-top: 10px;
+            margin-top: 30px;
+            margin-left: 40px;
+            margin-right: 15px;
+            alignment: center;
+            position: relative;
+            right: 35px;
+
+            &__icon-key {
+                alignment: left;
+                position: relative;
+                margin-left: 40px;
+                margin-top: 25px;
+                border-bottom: 1px #ffffff;
+                bottom: 45px;
+                left: 50px;
+            }
+        }
+    }
+
+    input[type="password"]:focus {
+        -webkit-appearance: none;
+        outline: none 0;
+    }
+
+    input[type="text"]:focus {
+        -webkit-appearance: none;
+        outline: none;
+    }
 </style>

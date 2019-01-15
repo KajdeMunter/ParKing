@@ -53,6 +53,10 @@
                 color: #009933;
             }
 
+            &:active { //.nav-bar__btn:active
+                color: #006633;
+            }
+
             &:last-child { // .nav-bar__btn:last-child
                 border: none;
             }
