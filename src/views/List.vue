@@ -58,13 +58,15 @@
 		    detected(e) {
 			    this.state = e;
 		    },
-            // TODO: get only distinct streetnames that have available parking spots
             getDistinctStreetnames() {
-	            return _.keys(_.countBy(this.markers.items, (data) => { return data.streetName; }));
+	            return _.keys(_.countBy(this.getAvailableMarkers(), (data) => { return data.streetName; }));
             },
             getDistinctHouseNumbersByStreetname(streetname) {
-		    	const numbers = _.filter(this.markers.items, {streetName: streetname});
+		    	const numbers = _.filter(this.getAvailableMarkers(), {streetName: streetname});
 	            return _.keys(_.countBy(numbers, (data) => { return data.houseNumber; }));
+            },
+            getAvailableMarkers() {
+		    	return _.filter(this.markers.items, { available: true });
             },
             toggledropdown(streetname) {
 	            this.droppedDownStreet = streetname;
