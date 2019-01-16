@@ -14,11 +14,11 @@ export const userService = {
 	mailCheck
 };
 
-function login(email, password) {
+function login(email, password, recaptchaToken) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password })
+		body: JSON.stringify({ email, password, recaptchaToken })
 	};
 
 	return fetch(`${config.apiUrl}/oauth/user/login`, requestOptions)
@@ -40,7 +40,9 @@ export function logout() {
 	localStorage.removeItem('user');
 }
 
-function register(user) {
+function register(user, recaptchaToken) {
+	user.recaptchaToken = recaptchaToken;
+
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
