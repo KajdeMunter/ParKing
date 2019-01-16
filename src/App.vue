@@ -59,6 +59,11 @@
         visibility: collapse !important;
     }
 
+    .logo {
+        width: 200px;
+        margin-right: 28px;
+    }
+
     .captcha-info {
         color: #aaaaaa;
         font-size: .7em;

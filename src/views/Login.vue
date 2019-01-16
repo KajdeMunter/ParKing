@@ -139,11 +139,6 @@
         }
     }
 
-    .logo {
-        width: 200px;
-        margin-right: 28px;
-    }
-
     // Fix the autofill messing everything up
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
