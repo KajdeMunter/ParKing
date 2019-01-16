@@ -53,10 +53,10 @@ export const account = {
         }
     },
     actions: {
-        login({ dispatch, commit }, { email, password }) {
+        login({ dispatch, commit }, { email, password, recaptchaToken }) {
             commit('loginRequest', { email });
 
-            userService.login(email, password)
+            userService.login(email, password, recaptchaToken)
                 .then(
                     user => {
                         commit('loginSuccess', user);
@@ -72,10 +72,9 @@ export const account = {
             userService.logout();
             commit('logout');
         },
-        register({ dispatch, commit }, user) {
+        register({ dispatch, commit }, { user, recaptchaToken }) {
             commit('registerRequest', user);
-
-            userService.register(user)
+            userService.register(user, recaptchaToken)
                 .then(
                     user => {
                         commit('registerSuccess', user);

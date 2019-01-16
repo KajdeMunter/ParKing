@@ -53,4 +53,15 @@
         position: absolute;
         padding-bottom: 34px;
     }
+
+    // ReCaptcha styling
+    .grecaptcha-badge {
+        visibility: collapse !important;
+    }
+
+    .captcha-info {
+        color: #aaaaaa;
+        font-size: .7em;
+        padding: 0 10px;
+    }
 </style>
