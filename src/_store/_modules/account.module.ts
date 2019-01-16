@@ -96,7 +96,7 @@ export const account = {
                     response => {
                         // display success message after route change completes
                         if ((email.indexOf('@') === -1) || (email.indexOf('.') === -1)) {
-                            dispatch('alert/error', 'Email is invalid', { root: true });
+                            return;
                         } else {
                             dispatch('alert/success', 'Email is available', { root: true });
                         }

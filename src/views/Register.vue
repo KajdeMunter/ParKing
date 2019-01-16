@@ -7,14 +7,14 @@
                        v-validate="{ required: true, email: true }" name="email" class="form-in form-in--email"
                        :class="{ 'is-invalid': submitted && errors.has('email') }"/>
                 <font-awesome-icon icon="envelope" class="form-icon"></font-awesome-icon>
-                <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
+                <span v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
             </div>
             <div class="form-item">
                 <input type="password" placeholder="password" v-model="user.password"
                        v-validate="{ required: true, min: 8 }" name="password" class="form-in form-in--password"
                        :class="{ 'is-invalid': submitted && errors.has('password') }"/>
                 <font-awesome-icon icon="key" class="form-icon"></font-awesome-icon>
-                <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
+                <span v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</span>
             </div>
             <div class="form-item">
                 <p class="captcha-info">
@@ -98,6 +98,9 @@
 </script>
 
 <style scoped lang="scss">
+    .invalid-feedback {
+        display: block;
+    }
     .form {
         &-item {
             padding-top: 20px;
@@ -157,11 +160,6 @@
             margin-left: -15px;
             margin-top: 5px;
         }
-    }
-
-    .logo {
-        width: 200px;
-        margin-right: 28px;
     }
 
     // Fix the autofill messing everything up
