@@ -3,18 +3,18 @@
         <img src="../assets/ParKing-Logo.png" class="logo" alt="none">
         <form @submit.prevent="handleSubmit">
             <div class="form-item">
-                <input type="email" placeholder="email" v-model="user.email"
+                <span v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
+                <input placeholder="email" v-model="user.email"
                        v-validate="{ required: true, email: true }" name="email" class="form-in form-in--email"
                        :class="{ 'is-invalid': submitted && errors.has('email') }"/>
                 <font-awesome-icon icon="envelope" class="form-icon"></font-awesome-icon>
-                <span v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
             </div>
             <div class="form-item">
+                <span v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</span>
                 <input type="password" placeholder="password" v-model="user.password"
                        v-validate="{ required: true, min: 8 }" name="password" class="form-in form-in--password"
                        :class="{ 'is-invalid': submitted && errors.has('password') }"/>
                 <font-awesome-icon icon="key" class="form-icon"></font-awesome-icon>
-                <span v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</span>
             </div>
             <div class="form-item">
                 <p class="captcha-info">
