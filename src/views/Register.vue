@@ -12,7 +12,7 @@
             <div class="form-item">
                 <span v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</span>
                 <input type="password" placeholder="password" v-model="user.password"
-                       v-validate="{ required: true, min: 8 }" name="password" class="form-in form-in--password"
+                       v-validate="{ required: true, min: 8, max: 128 }" name="password" class="form-in form-in--password"
                        :class="{ 'is-invalid': submitted && errors.has('password') }"/>
                 <font-awesome-icon icon="key" class="form-icon"></font-awesome-icon>
             </div>
