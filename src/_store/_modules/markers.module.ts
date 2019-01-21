@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const markers = {
     namespaced: true,
     state: {
-        all: <any>{}
+        all: {} as any
     },
     mutations: {
         getAllRequest(state) {
@@ -25,8 +25,8 @@ export const markers = {
             commit('getAllRequest');
             await markerService.getAll()
                 .then(
-                    markers => commit('getAllSuccess', markers),
-                    error => commit('getAllFailure', error)
+                    (markers) => commit('getAllSuccess', markers),
+                    (error) => commit('getAllFailure', error)
                 );
         },
     },

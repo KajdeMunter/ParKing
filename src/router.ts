@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import notFoundPage from './views/errors/notFound.vue'
+import notFoundPage from './views/errors/notFound.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
 

@@ -84,10 +84,10 @@
 					}
 				});
             },
-			getEmail () {
+			getEmail() {
 				this.mailCheck(this.user.email)
 			},
-			onCaptchaExpired () {
+			onCaptchaExpired() {
 				this.$refs.recaptcha.reset();
 			}
 		},

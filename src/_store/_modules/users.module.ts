@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const users = {
     namespaced: true,
     state: {
-        all: <any>{}
+        all: {} as any
     },
     mutations: {
         getAllRequest(state) {
@@ -21,19 +21,19 @@ export const users = {
         },
         deleteRequest(state, id) {
             // add 'deleting:true' property to user being deleted
-            state.all.items = state.all.items.map(user =>
+            state.all.items = state.all.items.map((user) =>
                 user.id === id
                     ? { ...user, deleting: true }
                     : user
-            )
+            );
         },
         deleteSuccess(state, id) {
             // remove deleted user from state
-            state.all.items = state.all.items.filter(user => user.id !== id)
+            state.all.items = state.all.items.filter((user) => user.id !== id);
         },
         deleteFailure(state, { id, error }) {
             // remove 'deleting:true' property and add 'deleteError:[error]' property to user
-            state.all.items = state.all.items.map(user => {
+            state.all.items = state.all.items.map((user) => {
                 if (user.id === id) {
                     // make copy of user without 'deleting:true' property
                     const { deleting, ...userCopy } = user;
@@ -42,7 +42,7 @@ export const users = {
                 }
 
                 return user;
-            })
+            });
         }
     },
     actions: {
@@ -51,8 +51,8 @@ export const users = {
 
             userService.getAll()
                 .then(
-                    users => commit('getAllSuccess', users),
-                    error => commit('getAllFailure', error)
+                    (users) => commit('getAllSuccess', users),
+                    (error) => commit('getAllFailure', error)
                 );
         },
 
@@ -61,8 +61,8 @@ export const users = {
 
             userService.delete(id)
                 .then(
-                    user => commit('deleteSuccess', id),
-                    error => commit('deleteSuccess', { id, error: error.toString() })
+                    (user) => commit('deleteSuccess', id),
+                    (error) => commit('deleteSuccess', { id, error: error.toString() })
                 );
         }
     },

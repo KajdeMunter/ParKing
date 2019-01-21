@@ -5,16 +5,16 @@ import { router } from '../../router';
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-interface userState {
+interface UserState {
     status: {
-        loggedIn?: Boolean
-        registering?: Boolean
-        loggingIn?: Boolean
-    },
-    user: String|null
+        loggedIn?: boolean
+        registering?: boolean
+        loggingIn?: boolean
+    };
+    user: string|null;
 }
 
-const state : userState = user
+const state: UserState = user
     ? { status: { loggedIn: true }, user }
     : { status: {}, user: null };
 
@@ -58,11 +58,11 @@ export const account = {
 
             userService.login(email, password, recaptchaToken)
                 .then(
-                    user => {
+                    (user) => {
                         commit('loginSuccess', user);
                         router.push('/');
                     },
-                    error => {
+                    (error) => {
                         commit('loginFailure', error);
                         dispatch('alert/error', error, { root: true });
                     }
@@ -76,15 +76,15 @@ export const account = {
             commit('registerRequest', user);
             userService.register(user, recaptchaToken)
                 .then(
-                    user => {
+                    (user) => {
                         commit('registerSuccess', user);
                         router.push('/login');
                         setTimeout(() => {
                             // display success message after route change completes
                             dispatch('alert/success', 'Registration successful', { root: true });
-                        })
+                        });
                     },
-                    error => {
+                    (error) => {
                         commit('registerFailure', error);
                         dispatch('alert/error', error, { root: true });
                     }
@@ -93,7 +93,7 @@ export const account = {
         mailCheck({ dispatch, commit }, email) {
             userService.mailCheck(email)
                 .then(
-                    response => {
+                    (response) => {
                         // display success message after route change completes
                         if ((email.indexOf('@') === -1) || (email.indexOf('.') === -1)) {
                             return;
@@ -101,7 +101,7 @@ export const account = {
                             dispatch('alert/success', 'Email is available', { root: true });
                         }
                     },
-                    error => {
+                    (error) => {
                         commit('registerFailure', error);
                         dispatch('alert/error', error, { root: true });
                     }
