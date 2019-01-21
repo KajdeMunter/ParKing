@@ -46,6 +46,20 @@
       "autoprefixer": {}
     }
   },
+  "eslintConfig": {
+    "rules": {
+      "max-line-length": {
+        "options": [150]
+      },
+      "quotemark": false,
+      "interface-name": false,
+      "ordered-imports": false,
+      "object-literal-sort-keys": false,
+      "no-consecutive-blank-lines": false,
+      "trailing-comma": false,
+      "no-shadowed-variable": false
+    }
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
