@@ -1,4 +1,6 @@
 import { logout } from './user.service'
+import { authHeader } from "../_helpers/auth-header";
+import { router } from "../router";
 
 const config = {
 	apiUrl: "https://parking.onthewifi.com:8070"
@@ -11,10 +13,10 @@ export const markerService = {
 function getAll() {
 	const requestOptions = {
 		method: 'GET',
-		headers: { accept: 'application/json' },
+		headers: { ...authHeader(), accept: 'application/json' },
 	};
 
-	return fetch(`${config.apiUrl}/api/availability/all`, requestOptions).then(handleResponse);
+	return fetch(`${config.apiUrl}/api/availability/all`, requestOptions).then(handleResponse).catch((e) => router.push('/login'));
 }
 
 function handleResponse(response) {
@@ -29,6 +31,7 @@ function handleResponse(response) {
 			const error = text || text.message || response.statusText;
 			return Promise.reject(error);
 		}
+
 		return JSON.parse(text);
 	});
 }
