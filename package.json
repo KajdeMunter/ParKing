@@ -15,6 +15,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.3",
     "bootstrap-scss": "^4.1.3",
     "i": "^0.3.6",
+    "lodash": "^4.17.11",
     "mapbox-gl": "^0.52.0-beta.2",
     "register-service-worker": "^1.0.0",
     "v-offline": "^1.0.10",
@@ -24,6 +25,7 @@
     "vue-property-decorator": "^7.0.0",
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.22",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -49,7 +51,9 @@
   "eslintConfig": {
     "rules": {
       "max-line-length": {
-        "options": [150]
+        "options": [
+          150
+        ]
       },
       "quotemark": false,
       "interface-name": false,

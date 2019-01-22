@@ -42,6 +42,7 @@
 	import { mapState, mapActions } from 'vuex'
 	import VueRecaptcha from 'vue-recaptcha';
     import { mailCheck } from '../_services/user.service'
+	import _ from 'lodash';
 
 	export default {
 		data() {
