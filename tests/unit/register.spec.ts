@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Login from '@/views/Login.vue';
+import Register from '@/views/Register.vue';
 import Vuex from 'vuex';
 
 // Font awesome
@@ -57,15 +57,15 @@ const store = new Vuex.Store({
     },
 });
 
-describe('Login', () => {
+describe('Register', () => {
     // Inspect the raw component options
-    const login = shallowMount(Login, {
+    const register = shallowMount(Register, {
         localVue,
         store,
         stubs: ['router-link']
     });
 
     it('Renders page', () => {
-        expect(login.text()).to.contain('This site is protected by reCAPTCHA and the Google');
+        expect(register.text()).to.contain('This site is protected by reCAPTCHA and the Google');
     });
 });
