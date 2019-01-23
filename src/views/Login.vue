@@ -13,11 +13,11 @@
                 <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
             </div>
             <div class="form-item">
-                <p class="captcha-info">
+                <div class="captcha-info">
                     This site is protected by reCAPTCHA and the Google
                     <a href="https://policies.google.com/privacy">Privacy Policy</a> and
                     <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-                </p>
+                </div>
                 <vue-recaptcha
                         ref="recaptcha"
                         @verify="onCaptchaVerified"
@@ -28,7 +28,9 @@
                 <button class="button button__login" :disabled="status.loggingIn">Login</button>
                 <img v-show="status.loggingIn"
                      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                <router-link to="/register" class="button button__register">Register</router-link>
+                <div class="form-register">
+                    Don't have an account? <router-link to="/register" class="button button__register">Register now</router-link>!
+                </div>
             </div>
         </form>
     </div>
@@ -83,10 +85,10 @@
             padding-top: 20px;
 
             .button {
-                color: #ffffff;
-                margin: 20px 10px;
-
                 &__register {
+                    color: #ffffff;
+                    text-decoration: underline;
+
                     &:hover {
                         color: #ffffff;
                         outline-color: #ffffff;
@@ -94,30 +96,20 @@
                 }
 
                 &__login {
-                    background: rgb(153, 153, 153);
+                    margin: 20px 10px;
+                    color: #ffffff;
+                    background: darken(#ffffff, 40%);
                     border: none;
                     transition: 0.3s;
                     border-radius: 5px;
                     padding: 5px 10px;
 
-                    &:focus {
-                        background-color: rgb(153, 153, 153);
-                        color: #ffffff;
-                        border: #ffffff;
-                        text-decoration: underline;
-                        outline-color: #ffffff;
-                        transition-property: background-color;
-                    }
-
                     &:hover {
-                        background-color: rgb(200, 193, 198);
-                        color: #ffffff;
+                        background: darken(#ffffff, 50%);
                     }
 
                     &:active {
-                        color: rgb(0, 153, 51);
-                        background-color: rgb(153, 153, 153);
-                        outline-color: #ffffff;
+                        background: darken(#ffffff, 60%);
                     }
                 }
             }
