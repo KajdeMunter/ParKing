@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div id="register">
         <img src="../assets/ParKing-Logo.png" class="logo" alt="none">
+        <h4>Sign up. Save time. Save the world.</h4>
         <form @submit.prevent="handleSubmit">
             <div class="form-item">
                 <span v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</span>
@@ -17,11 +18,11 @@
                 <font-awesome-icon icon="key" class="form-icon"></font-awesome-icon>
             </div>
             <div class="form-item">
-                <p class="captcha-info">
+                <div class="captcha-info">
                     This site is protected by reCAPTCHA and the Google
                     <a href="https://policies.google.com/privacy">Privacy Policy</a> and
                     <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-                </p>
+                </div>
                 <vue-recaptcha
                         ref="recaptcha"
                         @verify="onCaptchaVerified"
@@ -99,9 +100,16 @@
 </script>
 
 <style scoped lang="scss">
+    #register {
+        h4 {
+            padding-top: 20px;
+        }
+    }
+
     .invalid-feedback {
         display: block;
     }
+
     .form {
         &-item {
             padding-top: 20px;
@@ -124,24 +132,12 @@
                     border-radius: 5px;
                     padding: 5px 10px;
 
-                    &:focus {
-                        background-color: rgb(153, 153, 153);
-                        color: #ffffff;
-                        border: #ffffff;
-                        text-decoration: underline;
-                        outline-color: #ffffff;
-                        transition-property: background-color;
-                    }
-
                     &:hover {
-                        background-color: rgb(200, 193, 198);
-                        color: #ffffff;
+                        background: darken(#ffffff, 50%);
                     }
 
                     &:active {
-                        color: rgb(0, 153, 51);
-                        background-color: rgb(153, 153, 153);
-                        outline-color: #ffffff;
+                        background: darken(#ffffff, 60%);
                     }
                 }
             }
