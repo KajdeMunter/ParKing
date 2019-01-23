@@ -11,6 +11,16 @@
       "src": "./img/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "./img/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/safari-pinned-tab.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ],
   "start_url": "./index.html",
