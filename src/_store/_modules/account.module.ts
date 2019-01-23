@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { userService} from '../../_services/user.service.js';
+import { userService } from '../../_services/user.service.js';
 import { router } from '../../router';
 
 const user = JSON.parse(localStorage.getItem('user'));

@@ -36,6 +36,7 @@
 <script>
 	import {mapState, mapActions} from 'vuex';
 	import detectNetwork from 'v-offline';
+    import _ from 'lodash';
 
 	export default {
         name: "List",
