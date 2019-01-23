@@ -114,11 +114,11 @@
         border-radius: 50%;
 
         &--available {
-            background-image: url('../assets/marker.png');
+            background-image: url('../assets/Marker-available.png');
         }
 
         &--occupied {
-            background-image: url('../assets/Avatar.png');
+            background-image: url('../assets/Marker-occupied.png');
         }
         &__popup {
             color: black;
