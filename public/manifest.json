@@ -1,6 +1,6 @@
 {
-  "name": "parking",
-  "short_name": "parking",
+  "name": "ParKing",
+  "short_name": "ParKing",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -14,7 +14,7 @@
     }
   ],
   "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }
