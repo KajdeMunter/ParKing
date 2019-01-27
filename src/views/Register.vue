@@ -79,6 +79,8 @@
 			},
 			onCaptchaVerified(recaptchaToken) {
 				this.$refs.recaptcha.reset();
+
+				// Register user
 				this.$validator.validate().then(valid => {
 					const user = this.user;
 					if (valid) {
